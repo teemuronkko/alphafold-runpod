@@ -1,0 +1,24 @@
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Curculin.fasta because ~/Desktop/testfolder/Sweet_Curculin/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Curculin/ranked_0.pdb doesn't exist. *****
+>>
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Curculin.fasta because ~/Desktop/testfolder/Sweet_Curculin/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Curculin/ranked_0.pdb doesn't exist. *****
+>>
+>> AF2 finished at Fri Aug 18 12:04:25 CEST 2023 for Sweet_Curculin
+>> AF2 finished at Fri Aug 18 12:04:25 CEST 2023 for Sweet_Curculin
+>> Runtime: 0 s
+>> Runtime: 0 s
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Curculin.fasta because ~/Desktop/testfolder/Sweet_Curculin/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Curculin/ranked_0.pdb doesn't exist. *****
+>>
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Curculin.fasta because ~/Desktop/testfolder/Sweet_Curculin/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Curculin/ranked_0.pdb doesn't exist. *****
+>>
+>> AF2 finished at Fri Aug 18 12:07:29 CEST 2023 for Sweet_Curculin
+>> AF2 finished at Fri Aug 18 12:07:29 CEST 2023 for Sweet_Curculin
+>> Runtime: 0 s
+>> Runtime: 0 s

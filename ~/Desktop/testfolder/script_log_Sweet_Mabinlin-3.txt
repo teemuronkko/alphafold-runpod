@@ -1,0 +1,24 @@
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Mabinlin-3.fasta because ~/Desktop/testfolder/Sweet_Mabinlin-3/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Mabinlin-3/ranked_0.pdb doesn't exist. *****
+>>
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Mabinlin-3.fasta because ~/Desktop/testfolder/Sweet_Mabinlin-3/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Mabinlin-3/ranked_0.pdb doesn't exist. *****
+>>
+>> AF2 finished at Fri Aug 18 12:04:25 CEST 2023 for Sweet_Mabinlin-3
+>> AF2 finished at Fri Aug 18 12:04:25 CEST 2023 for Sweet_Mabinlin-3
+>> Runtime: 0 s
+>> Runtime: 0 s
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Mabinlin-3.fasta because ~/Desktop/testfolder/Sweet_Mabinlin-3/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Mabinlin-3/ranked_0.pdb doesn't exist. *****
+>>
+>> ***** Prediction is skipped for /projects/ilfgrid/people/pqh443/AF2/Fastas/Complexes/Sweet_Mabinlin-3.fasta because ~/Desktop/testfolder/Sweet_Mabinlin-3/features.pkl does not exist. *****
+>>
+>> ***** Prediction failed, or ~/Desktop/testfolder/Sweet_Mabinlin-3/ranked_0.pdb doesn't exist. *****
+>>
+>> AF2 finished at Fri Aug 18 12:07:29 CEST 2023 for Sweet_Mabinlin-3
+>> AF2 finished at Fri Aug 18 12:07:29 CEST 2023 for Sweet_Mabinlin-3
+>> Runtime: 0 s
+>> Runtime: 0 s

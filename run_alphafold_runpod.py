@@ -367,8 +367,8 @@ def main(argv):
   #    use_small_bfd=use_small_bfd,
   #    use_precomputed_msas=FLAGS.use_precomputed_msas)
 
-  #if run_multimer_system:
-  #  num_predictions_per_model = FLAGS.num_multimer_predictions_per_model
+  if run_multimer_system:
+    num_predictions_per_model = FLAGS.num_multimer_predictions_per_model
   #  data_pipeline = pipeline_multimer.DataPipeline(
   #      monomer_data_pipeline=monomer_data_pipeline,
   #      jackhmmer_binary_path=FLAGS.jackhmmer_binary_path,
