@@ -438,7 +438,7 @@ def main(argv):
 #      'use_gpu_relax',
 #  ])
 
-  if __name__ == '__main__':
+if __name__ == '__main__':
   flags.mark_flags_as_required([
       'fasta_paths',
       'output_dir',
