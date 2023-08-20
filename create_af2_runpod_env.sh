@@ -6,7 +6,7 @@ apt-get install -y tmux vim
 
 # Export cuda environment variables
 export CUDA_HOME=/usr/local/cuda
-export export PATH=/usr/local/cuda/bin/${PATH:+:${PATH}}$
+export PATH=/usr/local/cuda/bin/${PATH:+:${PATH}}$
 export CPATH=/usr/local/cuda/include:$CPATH
 export LIBRARY_PATH=/usr/local/cuda/lib64:$LIBRARY_PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64/${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}$
