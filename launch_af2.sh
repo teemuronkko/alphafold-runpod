@@ -24,7 +24,7 @@ done
 AF_DIR="/workspace/alphafold-runpod"
 AFDB_DIR="/workspace/alphafold-genetic-databases"
 AF_ENV="/opt/conda/envs/af2_runpod"
-N_CPUS=4
+N_CPUS=$(grep -c ^processor /proc/cpuinfo)
 
 # Ouptut dir 
 AF_OUTPUT_DIR="/workspace/AF2_Models"
@@ -55,38 +55,36 @@ for (( i=1; i<=N_LINES; i++ )); do
     FEATURES_PKL="${AF_OUTPUT_DIR}/${BASENAME}/features.pkl"
 
     log_file="${AF_OUTPUT_DIR}/${BASENAME}/${BASENAME}_log.txt"
+     
+    echo -e "[$(date)] >> Processing ${BASENAME}, ${i}/${N_LINES}"
 
     # Redirect standard output and standard error to the log file
     exec > "${log_file}" 2>&1
 
-    echo -e ">> Job started at $(date) for ${BASENAME}"
+    echo -e "[$(date)] >> Job started at $(date) for ${BASENAME}"
 
     # Check if pickle file exists and start prediction if so
     if [ -e $FEATURES_PKL ]; then
-        echo -e "\n>> ***** Starting prediction for $BASENAME *****"
+        echo -e "\n[$(date)] >> ***** Starting prediction for $BASENAME *****"
 
         # Launch AF using the shell script
         $AF_DIR/run_alphafold.sh -d $AFDB_DIR -o $AF_OUTPUT_DIR -f $FASTAFILE -t "2023-01-01" -g true -r true -e false -n ${N_CPUS} -m multimer -c full_dbs -p true -l 1 -b false
-        echo -e ">>"
     else
-        echo -e ">> ***** Prediction is skipped for $FASTAFILE because $FEATURES_PKL does not exist. *****"
-        echo -e ">>"
+        echo -e "[$(date)] >> ***** Prediction is skipped for $FASTAFILE because $FEATURES_PKL does not exist. *****"
     fi
 
     if [ -f "$AF_OUTPUT_DIR/$BASENAME/ranked_0.pdb" ]; then
         cp $AF_OUTPUT_DIR/$BASENAME/ranked_0.pdb $AF_OUTPUT_DIR/$BASENAME/${BASENAME}.pdb
         pred_end=`date +%s`
         pred_runtime=$((pred_end-pred_start))
-        echo -e ">> ***** Prediction for $BASENAME finished in $pred_runtime seconds. *****"
-        echo -e ">>"
+        echo -e "[$(date)] >> ***** Prediction for $BASENAME finished in $pred_runtime seconds. *****"
     elif [ -e $FEATURES_PKL ]; then 
-        echo -e ">> ***** Prediction failed, or $AF_OUTPUT_DIR/$BASENAME/ranked_0.pdb doesn't exist. *****"
-        echo -e ">>"
+        echo -e "[$(date)] >> ***** Prediction failed, or $AF_OUTPUT_DIR/$BASENAME/ranked_0.pdb doesn't exist. *****"
     fi
 
     end=`date +%s`
     runtime=$((end-start))
-    echo -e ">> AF2 finished at $(date) for $BASENAME"
-    echo -e ">> Runtime: $runtime s"
+    echo -e "[$(date)] >> AF2 finished at $(date) for $BASENAME"
+    echo -e "[$(date)] >> Runtime: $runtime s"
     exec >&-
 done
