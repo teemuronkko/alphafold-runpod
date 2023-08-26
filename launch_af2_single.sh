@@ -31,16 +31,17 @@ NUM_CPUS=$(nproc)
 # Get the number of available GPUs using NVIDIA's nvidia-smi command
 NUM_GPUS=$(nvidia-smi --list-gpus | wc -l)
 
-# Perform the division and round down using bc
-N_CPUS=$(echo "scale=0; $NUM_CPUS / $NUM_GPUS" | bc)
+# Get the id of the GPU device
+GPU_ID=$2
 
-echo "Number of available CPUs: $num_cpus"
-echo "Number of available GPUs: $num_gpus"
-echo "CPUs per GPU: $cpu_per_gpu"
+# Perform the division and round down using bc
+N_CPUS=$((NUM_CPUS/NUM_GPUS))
 
 # Ouptut dir 
 AF_OUTPUT_DIR="/workspace/AF2_Models"
+AF_FINISHED_MODELS_DIR="/workspace/AF2_Models_Finished"
 mkdir -p $AF_OUTPUT_DIR
+mkdir -p $AF_FINISHED_MODELS_DIR
 
 # Go to AlphaFold 2 directory and activate required conda environment
 cd $AF_DIR
@@ -71,7 +72,7 @@ if [ -e $FEATURES_PKL ]; then
     echo -e "\n[$(date)] >> ***** Starting prediction for $BASENAME *****"
 
     # Launch AF using the shell script
-    $AF_DIR/run_alphafold.sh -d $AFDB_DIR -o $AF_OUTPUT_DIR -f $FASTAFILE -t "2023-01-01" -g true -r true -e true -n ${N_CPUS} -m multimer -c full_dbs -p true -l 1 -b false
+    $AF_DIR/run_alphafold.sh -d $AFDB_DIR -o $AF_OUTPUT_DIR -f $FASTAFILE -t "2023-01-01" -g true -r true -e true -n ${N_CPUS} -a $GPU_ID -m multimer -c full_dbs -p true -l 1 -b false
 else
     echo -e "[$(date)] >> ***** Prediction is skipped for $FASTAFILE because $FEATURES_PKL does not exist. *****"
 fi
@@ -81,6 +82,8 @@ if [ -f "$AF_OUTPUT_DIR/$BASENAME/ranked_0.pdb" ]; then
     pred_end=`date +%s`
     pred_runtime=$((pred_end-pred_start))
     echo -e "[$(date)] >> ***** Prediction for $BASENAME finished in $pred_runtime seconds. *****"
+    echo -e "[$(date)] >> Moving results to another folder "
+    mv $AF_OUTPUT_DIR/$BASENAME $AF_FINISHED_MODELS_DIR/$BASENAME
 elif [ -e $FEATURES_PKL ]; then 
     echo -e "[$(date)] >> ***** Prediction failed, or $AF_OUTPUT_DIR/$BASENAME/ranked_0.pdb doesn't exist. *****"
 fi

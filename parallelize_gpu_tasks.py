@@ -5,8 +5,11 @@ import subprocess
 # Get the current working directory
 cd = os.getcwd()
 
+# Run nvidia-smi to get GPU information
+result = subprocess.run(["nvidia-smi", "--list-gpus"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
 # Set number of available GPUs and number of processes per GPU
-N_GPUS = 4
+N_GPUS = len(result.stdout.strip().split('\n'))
 PROCESS_PER_GPU = 1    
 
 # Empty queue to store GPU ids
@@ -18,10 +21,10 @@ def launch_af2(filename):
     try:
         # Get the process id of current process
         id = current_process().ident
-        print('Launching AF2 job with ID {} and input file {filename} starting on GPU {}'.format(id, filename, gpu_id))
+        print('Launching AF2 job with ID {} and input file {} starting on GPU {}'.format(id, filename, gpu_id))
         
         # Launch AF2 job on the GPU
-        AF2_command = f"bash {cd}/launch_af2_single.sh {filename}"
+        AF2_command = f"bash {cd}/launch_af2_single.sh {filename} {gpu_id}"
         subprocess.run(AF2_command, shell=True)
 
         # Print the process id of the finished job
@@ -36,7 +39,7 @@ for gpu_ids in range(N_GPUS):
         gpu_queue.put(gpu_ids)
 
 # Path to the text file containing the paths to the fasta files
-input_path = "path/to/your/file.txt"
+input_path = "/workspace/Complexes.txt"
 
 # Open the text file and read the paths to the fasta files
 with open(input_path, "r") as file:

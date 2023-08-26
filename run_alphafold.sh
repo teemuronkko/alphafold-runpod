@@ -16,7 +16,7 @@ usage() {
         echo "-r <run_relax>        Whether to run the final relaxation step on the predicted models. Turning relax off might result in predictions with distracting stereochemical violations but might help in case you are having issues with the relaxation stage (default: true)"
         echo "-e <enable_gpu_relax> Run relax on GPU if GPU is enabled (default: true)"
         echo "-n <openmm_threads>   OpenMM threads (default: all available cores)"
-#        echo "-a <gpu_devices>      Comma separated list of devices to pass to 'CUDA_VISIBLE_DEVICES' (default: 0)"
+        echo "-a <gpu_devices>      Comma separated list of devices to pass to 'CUDA_VISIBLE_DEVICES' (default: 0)"
         echo "-m <model_preset>     Choose preset model configuration - the monomer model, the monomer model with extra ensembling, monomer model with pTM head, or multimer model (default: 'monomer')"
         echo "-c <db_preset>        Choose preset MSA database configuration - smaller genetic database config (reduced_dbs) or full genetic database config (full_dbs) (default: 'full_dbs')"
         echo "-p <use_precomputed_msas> Whether to read MSAs that have been written to disk. WARNING: This will not check if the sequence, database or configuration have changed (default: 'false')"
@@ -52,9 +52,9 @@ while getopts ":d:o:f:t:g:r:e:n:a:m:c:p:l:b" i; do
         n)
                 openmm_threads=$OPTARG
         ;;
-#        a)
-#                gpu_devices=$OPTARG
-#        ;;
+        a)
+                gpu_devices=$OPTARG
+        ;;
         m)
                 model_preset=$OPTARG
         ;;
@@ -86,9 +86,9 @@ if [[ "$use_gpu" == "" ]] ; then
     use_gpu=true
 fi
 
-#if [[ "$gpu_devices" == "" ]] ; then
-#    gpu_devices=0
-#fi
+if [[ "$gpu_devices" == "" ]] ; then
+    gpu_devices=0
+fi
 
 if [[ "$run_relax" == "" ]] ; then
     run_relax="true"
@@ -141,14 +141,14 @@ fi
 
 # Export ENVIRONMENT variables and set CUDA devices for use
 # CUDA GPU control
-#export CUDA_VISIBLE_DEVICES=-1
-#if [[ "$use_gpu" == true ]] ; then
-#    export CUDA_VISIBLE_DEVICES=0
-#
-#    if [[ "$gpu_devices" ]] ; then
-#        export CUDA_VISIBLE_DEVICES=$gpu_devices
-#    fi
-#fi
+export CUDA_VISIBLE_DEVICES=-1
+if [[ "$use_gpu" == true ]] ; then
+    export CUDA_VISIBLE_DEVICES=0
+
+    if [[ "$gpu_devices" ]] ; then
+        export CUDA_VISIBLE_DEVICES=$gpu_devices
+    fi
+fi
 
 # OpenMM threads control
 if [[ "$openmm_threads" ]] ; then
