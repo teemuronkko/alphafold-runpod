@@ -24,7 +24,19 @@ done
 AF_DIR="/workspace/alphafold-runpod"
 AFDB_DIR="/workspace/alphafold-genetic-databases"
 AF_ENV="/opt/conda/envs/af2_runpod"
-N_CPUS=$(grep -c ^processor /proc/cpuinfo)
+
+# Get the number of available CPUs
+NUM_CPUS=$(nproc)
+
+# Get the number of available GPUs using NVIDIA's nvidia-smi command
+NUM_GPUS=$(nvidia-smi --list-gpus | wc -l)
+
+# Perform the division and round down using bc
+N_CPUS=$(echo "scale=0; $NUM_CPUS / $NUM_GPUS" | bc)
+
+echo "Number of available CPUs: $num_cpus"
+echo "Number of available GPUs: $num_gpus"
+echo "CPUs per GPU: $cpu_per_gpu"
 
 # Ouptut dir 
 AF_OUTPUT_DIR="/workspace/AF2_Models"
