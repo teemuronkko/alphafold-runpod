@@ -26,8 +26,6 @@ AFDB_DIR="/workspace/alphafold-genetic-databases"
 AF_ENV="/opt/conda/envs/af2_runpod"
 N_CPUS=$(grep -c ^processor /proc/cpuinfo)
 
-echo -e "Using ${N_CPUS} cpus"
-
 # Ouptut dir 
 AF_OUTPUT_DIR="/workspace/AF2_Models"
 mkdir -p $AF_OUTPUT_DIR
@@ -51,8 +49,6 @@ FEATURES_PKL="${AF_OUTPUT_DIR}/${BASENAME}/features.pkl"
 
 log_file="${AF_OUTPUT_DIR}/${BASENAME}/${BASENAME}_log.txt"
     
-echo -e "[$(date)] >> Processing ${BASENAME}, ${i}/${N_LINES}"
-
 # Redirect standard output and standard error to the log file
 exec > "${log_file}" 2>&1
 
