@@ -72,8 +72,10 @@ conda install -y -c conda-forge \
 
 conda install -y -c bioconda hmmer hhsuite==3.3.0 kalign2
 
-wget -q -P ${AF_DIR}/alphafold/common/ \
-  https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
+if [ ! -e ${AF_DIR}/alphafold/common/stereo_chemical_props.txt ]; then
+  wget -q -P ${AF_DIR}/alphafold/common/ \
+    https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
+fi
 
 pip3 install --upgrade pip --no-cache-dir \
     && pip3 install -r ${AF_DIR}/requirements.txt --no-cache-dir \
