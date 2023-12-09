@@ -46,6 +46,7 @@ mkdir -p $AF_FINISHED_MODELS_DIR
 # Go to AlphaFold 2 directory and activate required conda environment
 cd $AF_DIR
 source activate $AF_ENV
+conda activate $AF_ENV
 
 # Get start time for logging
 start=`date +%s`
