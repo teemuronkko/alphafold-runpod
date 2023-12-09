@@ -20,6 +20,9 @@ while getopts ":h" option; do
    esac
 done
 
+# Source bashrc so that conda environment can be activated
+source ~/.bashrc
+
 # AlphaFold paths and conda environment
 AF_DIR="/workspace/alphafold-runpod"
 AFDB_DIR="/workspace/alphafold-genetic-databases"
@@ -48,6 +51,14 @@ cd $AF_DIR
 source activate $AF_ENV
 conda activate $AF_ENV
 
+# Check if the current Conda environment matches the target environment
+if [ "$CONDA_DEFAULT_ENV" == "af2_runpod" ]; then
+  echo "af2_runpod conda environment activated."
+else
+  echo "af2_runpod conda environment was not activated. Exiting the script..."
+  exit
+fi
+
 # Get start time for logging
 start=`date +%s`
 
@@ -73,7 +84,7 @@ if [ -e $FEATURES_PKL ]; then
     echo -e "\n[$(date)] >> ***** Starting prediction for $BASENAME *****"
 
     # Launch AF using the shell script
-    $AF_DIR/run_alphafold.sh -d $AFDB_DIR -o $AF_OUTPUT_DIR -f $FASTAFILE -t "2023-01-01" -g true -r true -e true -n ${N_CPUS} -a $GPU_ID -m multimer -c full_dbs -p true -l 1 -b false
+    $AF_DIR/run_alphafold.sh -d $AFDB_DIR -o $AF_OUTPUT_DIR -f $FASTAFILE -t "1950-01-01" -g true -r true -e true -n ${N_CPUS} -a $GPU_ID -m multimer -c full_dbs -p true -l 1 -b false
 else
     echo -e "[$(date)] >> ***** Prediction is skipped for $FASTAFILE because $FEATURES_PKL does not exist. *****"
 fi
