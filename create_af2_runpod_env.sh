@@ -26,7 +26,20 @@ mkdir -p $AFDB_DIR
 # Install aria2c and load model parameters
 apt-get update
 apt-get install -y aria2
-bash scripts/download_alphafold_params.sh $AFDB_DIR
+
+# Download alphafold parameters if they are not present already
+file_list="param_files.txt"
+while IFS= read -r filename; do
+  file_path="$AFDB_DIR/params/$filename"
+  if [ -e "$file_path" ]; then
+    echo "File '$filename' exists in the folder."
+  else
+    echo "File '$filename' does not exist in the folder."
+    rm -rf $AFDB_DIR/params
+    bash scripts/download_alphafold_params.sh $AFDB_DIR
+    break
+  fi
+done < "$file_list"
 
 # Install Miniconda package manager.
 wget -q -P /tmp \
@@ -42,6 +55,15 @@ source ~/.bashrc
 
 conda create -n af2_runpod python=3.8 -y
 conda activate af2_runpod
+source activate af2_runpod
+
+# Check if the current Conda environment matches the target environment
+if [ "$CONDA_DEFAULT_ENV" == "af2_runpod" ]; then
+  echo "af2_runpod conda environment activated."
+else
+  echo "af2_runpod conda environment was not activated. Exiting the script..."
+  exit
+fi
 
 conda install -y -c conda-forge \
     openmm=7.5.1 \

@@ -1,0 +1,17 @@
+LICENSE
+alphafold_params_2022-12-06.tar
+params_model_1.npz
+params_model_1_multimer_v3.npz
+params_model_1_ptm.npz
+params_model_2.npz
+params_model_2_multimer_v3.npz
+params_model_2_ptm.npz
+params_model_3.npz
+params_model_3_multimer_v3.npz
+params_model_3_ptm.npz
+params_model_4.npz
+params_model_4_multimer_v3.npz
+params_model_4_ptm.npz
+params_model_5.npz
+params_model_5_multimer_v3.npz
+params_model_5_ptm.npz
