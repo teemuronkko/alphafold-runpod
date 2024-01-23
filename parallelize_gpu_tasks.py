@@ -1,6 +1,21 @@
 from multiprocessing import Pool, current_process, Queue
 import os
 import subprocess
+import argparse
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Launch AF2 jobs on multiple GPUs.')
+parser.add_argument('--fasta_paths', type=str, help='Path to the text file containing the paths to the fasta files')
+args = parser.parse_args()
+
+# Check if --fasta_paths argument is provided
+if not args.fasta_paths:
+    parser.error('--fasta_paths is a required argument.')
+
+# Check if the fasta_paths file exists
+if not os.path.exists(args.fasta_paths):
+    print(f"Error: The file {args.fasta_paths} does not exist.")
+    exit(1)
 
 # Get the current working directory
 cd = os.getcwd()
@@ -38,12 +53,9 @@ for gpu_ids in range(N_GPUS):
     for _ in range(PROCESS_PER_GPU):
         gpu_queue.put(gpu_ids)
 
-# Path to the text file containing the paths to the fasta files
-input_path = "/workspace/Complexes.txt"
-
 # Open the text file and read the paths to the fasta files
-with open(input_path, "r") as file:
-    fasta_paths = [ line.strip() for line in file ]
+with open(args.fasta_paths, "r") as file:
+    fasta_paths = [line.strip() for line in file]
 
 # Create a pool of workers and launch the jobs on the pool
 pool = Pool(processes=PROCESS_PER_GPU * N_GPUS)
