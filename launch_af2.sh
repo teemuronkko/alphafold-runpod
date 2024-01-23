@@ -20,6 +20,9 @@ while getopts ":h" option; do
    esac
 done
 
+# Source bashrc so that conda environment can be activated
+source ~/.bashrc
+
 # AlphaFold paths and conda environment
 AF_DIR="/workspace/alphafold-runpod"
 AFDB_DIR="/workspace/alphafold-genetic-databases"
@@ -35,6 +38,7 @@ mkdir -p $AF_OUTPUT_DIR
 # Go to AlphaFold 2 directory and activate required conda environment
 cd $AF_DIR
 source activate $AF_ENV
+conda activate $AF_ENV
 
 # File containing paths to fasta files
 FASTAPATHS=$1
