@@ -1,6 +1,0 @@
---model_preset=multimer
---db_preset=full_dbs
---uniclust30_database_path=/groups/scienceai/tronkko/alphafold-genetic-databases/uniref30/UniRef30_2023_02/UniRef30_2023_02
---bfd_database_path=/groups/scienceai/tronkko/alphafold-genetic-databases/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt
---pdb_seqres_database_path=/groups/scienceai/tronkko/alphafold-genetic-databases/pdb_seqres/pdb_seqres.txt
---uniprot_database_path=/groups/scienceai/tronkko/alphafold-genetic-databases/uniprot/uniprot.fasta
