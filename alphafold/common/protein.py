@@ -170,11 +170,14 @@ def to_pdb(prot: Protein) -> str:
 
   # Construct a mapping from chain integer indices to chain ID strings.
   chain_ids = {}
-  for i in np.unique(chain_index):  # np.unique gives sorted output.
+
+  #The multimer version chain_ids starts from 1, using enumerate ensures the PDB_CHAIN_IDS are picked in order/BW
+  for i,j in enumerate(np.unique(chain_index)):  # np.unique gives sorted output.
     if i >= PDB_MAX_CHAINS:
       raise ValueError(
           f'The PDB format supports at most {PDB_MAX_CHAINS} chains.')
-    chain_ids[i] = PDB_CHAIN_IDS[i]
+     #    chain_ids[i] = PDB_CHAIN_IDS[i]
+    chain_ids[j] = PDB_CHAIN_IDS[i]
 
   pdb_lines.append('MODEL     1')
   atom_index = 1

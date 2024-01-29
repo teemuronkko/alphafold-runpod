@@ -524,7 +524,7 @@ class Transition(hk.Module):
         self.global_config.subbatch_size,
         batched_args=[act],
         nonbatched_args=[],
-        low_memory=not is_training)
+        low_memory=True) # low_memory=not is_training) low_memory=not is_training)
 
     return act
 
@@ -770,7 +770,7 @@ class MSARowAttentionWithPairBias(hk.Module):
         self.global_config.subbatch_size,
         batched_args=[msa_act, msa_act, bias],
         nonbatched_args=[nonbatched_bias],
-        low_memory=not is_training)
+        low_memory=True) # low_memory=not is_training) 
 
     return msa_act
 
@@ -823,7 +823,7 @@ class MSAColumnAttention(hk.Module):
         self.global_config.subbatch_size,
         batched_args=[msa_act, msa_act, bias],
         nonbatched_args=[],
-        low_memory=not is_training)
+        low_memory=True) # low_memory=not is_training) 
 
     msa_act = jnp.swapaxes(msa_act, -2, -3)
 
@@ -881,7 +881,7 @@ class MSAColumnGlobalAttention(hk.Module):
         self.global_config.subbatch_size,
         batched_args=[msa_act, msa_act, msa_mask],
         nonbatched_args=[],
-        low_memory=not is_training)
+        low_memory=True) # low_memory=not is_training) low_memory=not is_training)
 
     msa_act = jnp.swapaxes(msa_act, -2, -3)
 
@@ -942,7 +942,7 @@ class TriangleAttention(hk.Module):
         self.global_config.subbatch_size,
         batched_args=[pair_act, pair_act, bias],
         nonbatched_args=[nonbatched_bias],
-        low_memory=not is_training)
+        low_memory=True) # low_memory=not is_training) low_memory=not is_training)
 
     if c.orientation == 'per_column':
       pair_act = jnp.swapaxes(pair_act, -2, -3)
@@ -1491,7 +1491,7 @@ class OuterProductMean(hk.Module):
         c.chunk_size,
         batched_args=[left_act],
         nonbatched_args=[],
-        low_memory=True,
+        low_memory=True,  # low_memory=not is_training) low_memory=True,
         input_subbatch_dim=1,
         output_subbatch_dim=0)
 
@@ -2094,7 +2094,7 @@ class TemplateEmbedding(hk.Module):
         self.config.subbatch_size,
         batched_args=batched_args,
         nonbatched_args=nonbatched_args,
-        low_memory=not is_training)
+        low_memory=True) # low_memory=not is_training) low_memory=not is_training)
     embedding = jnp.reshape(embedding,
                             [num_res, num_res, query_num_channels])
 

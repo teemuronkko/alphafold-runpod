@@ -67,8 +67,7 @@ class MultipleChainsError(Error):
 # Prefilter exceptions.
 class PrefilterError(Exception):
   """A base class for template prefilter exceptions."""
-
-
+  
 class DateError(PrefilterError):
   """An error indicating that the hit date was after the max allowed date."""
 
