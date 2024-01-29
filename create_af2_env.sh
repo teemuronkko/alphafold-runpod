@@ -28,18 +28,12 @@ apt-get update
 apt-get install -y aria2
 
 # Download alphafold parameters if they are not present already
-file_list="param_files.txt"
-while IFS= read -r filename; do
-  file_path="$AFDB_DIR/params/$filename"
-  if [ -e "$file_path" ]; then
-    echo "File '$filename' exists in the folder."
-  else
-    echo "File '$filename' does not exist in the folder."
-    rm -rf $AFDB_DIR/params
-    bash scripts/download_alphafold_params.sh $AFDB_DIR
-    break
-  fi
-done < "$file_list"
+wget https://storage.googleapis.com/alphafold/alphafold_params_2022-01-19.tar
+wget https://storage.googleapis.com/alphafold/alphafold_params_2022-03-02.tar
+tar -xvf alphafold_params_2022-01-19.tar
+tar -xvf alphafold_params_2022-03-02.tar
+rm alphafold_params_2022-01-19.tar
+rm alphafold_params_2022-03-02.tar
 
 # Install Miniconda package manager.
 wget -q -P /tmp \
